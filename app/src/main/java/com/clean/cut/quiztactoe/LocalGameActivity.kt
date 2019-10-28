@@ -18,6 +18,8 @@ class LocalGameActivity : AppCompatActivity() {
     }
 
     private fun initialize() {
+
+
         adapter = GameBoardGridAdapter(list)
         boardGv.numColumns = 3
         boardGv.adapter = adapter
