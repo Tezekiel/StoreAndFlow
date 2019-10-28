@@ -2,15 +2,11 @@ package com.clean.cut.quiztactoe
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Adapter
-import android.widget.GridView
-import android.widget.LinearLayout
-import android.widget.ListAdapter
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.clean.cut.quiztactoe.adapters.GameBoardGridAdapter
 import kotlinx.android.synthetic.main.activity_local_game.*
 
 class LocalGameActivity : AppCompatActivity() {
-    private lateinit var adapter: Adapter
+    private lateinit var adapter: GameBoardGridAdapter
     var list = arrayListOf("a", "b","c", "d")
 
 
@@ -22,6 +18,8 @@ class LocalGameActivity : AppCompatActivity() {
     }
 
     private fun initialize() {
-        
+        adapter = GameBoardGridAdapter(list)
+        boardGv.numColumns = 3
+        boardGv.adapter = adapter
     }
 }

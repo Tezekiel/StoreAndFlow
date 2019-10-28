@@ -12,7 +12,7 @@ class MenuActivity : AppCompatActivity() {
         setContentView(R.layout.activity_menu)
     }
 
-    fun startActivityLocalGame(view: View) {
-        startActivity(Intent(this, LocalGameActivity::class.java))
+    fun startActivityLocalGameSetup(view: View) {
+        startActivity(Intent(this, LocalGameSetupActivity::class.java))
     }
 }

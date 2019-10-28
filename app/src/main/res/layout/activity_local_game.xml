@@ -16,8 +16,10 @@
         android:background="@color/primaryDarkColor">
         <GridView
             android:id="@+id/boardGv"
-            android:layout_width="200dp"
-            android:layout_height="200dp" />
+            android:layout_width="240dp"
+            android:layout_height="240dp"
+            android:horizontalSpacing="2dp"
+            android:verticalSpacing="2dp" />
 
     </RelativeLayout>
 
