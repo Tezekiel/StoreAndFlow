@@ -20,8 +20,8 @@ class LocalGameSetupActivity : AppCompatActivity() {
             val intent = Intent(this, LocalGameActivity::class.java)
             intent.putExtra("player1", Player(player1NameEt.text.toString(), "x"))
             intent.putExtra("player2", Player(player2NameEt.text.toString(), "o"))
-            intent.putExtra("rowCount", rowNumberEt.text.toString())
-            intent.putExtra("columnCount", columnNumberEt.text.toString())
+            intent.putExtra("rowCount", rowNumberEt.text.toString().toInt())
+            intent.putExtra("columnCount", columnNumberEt.text.toString().toInt())
             startActivity(intent)
         }
     }

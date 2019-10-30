@@ -5,7 +5,7 @@
     <data>
 
         <variable
-            name="localGameViewModel"
+            name="viewModel"
             type="com.clean.cut.quiztactoe.viewmodel.LocalGameViewModel" />
     </data>
 
@@ -30,7 +30,7 @@
                 android:layout_height="240dp"
                 android:horizontalSpacing="2dp"
                 android:verticalSpacing="2dp"
-                app:OnItemClickListener="@{(parent, view, position,id)->onItemClickListener()}"
+                app:OnItemClickListener="@{(parent, view, position,id)->viewModel.onItemClickListener(parent, view, position,id)}"
                 />
 
         </RelativeLayout>
