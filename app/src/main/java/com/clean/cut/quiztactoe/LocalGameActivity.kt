@@ -39,13 +39,17 @@ class LocalGameActivity : AppCompatActivity() {
         //rv adapter
         adapter = GameBoardGridAdapter()
         adapter.setList(viewModel.cells.value!!)
-        boardGv.numColumns = viewModel.columnCount
+        boardGv.numColumns = columnCount
         boardGv.adapter = adapter
 
         //observers
         viewModel.cells.observe(this, Observer {
             adapter.setList(it)
         })
+        /*viewModel.getWinner().observe(this, Observer {
+            Log.v("primjer", "WIN")
+        })*/
+
     }
 
     private fun getDataFromIntent() {

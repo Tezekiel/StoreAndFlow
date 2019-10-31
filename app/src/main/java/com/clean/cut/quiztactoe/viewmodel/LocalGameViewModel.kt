@@ -3,6 +3,7 @@ package com.clean.cut.quiztactoe.viewmodel
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.clean.cut.quiztactoe.objects.Cell
@@ -12,7 +13,7 @@ import com.clean.cut.quiztactoe.objects.Player
 
 class LocalGameViewModel : ViewModel() {
     private var rowCount: Int = 0
-    public var columnCount: Int = 0
+    private var columnCount: Int = 0
     private var player1Name: String = ""
     private var player2Name: String = ""
     private lateinit var game: Game
@@ -29,15 +30,27 @@ class LocalGameViewModel : ViewModel() {
         cells.value = game.cells
     }
 
-    fun onItemClickListener(parent:ViewGroup, view:View, position:Int,id:Long){
+    fun onItemClickListener(parent: ViewGroup, view: View, position: Int, id: Long) {
         val row = position / columnCount
         val column = position % columnCount
 
-        var temp:Array<Array<Cell?>> = cells.value!!
-        temp[row][column] = Cell(game.currentPlayer)
-        cells.value= temp
+        val temp: Array<Array<Cell?>> = cells.value!!
+        val clickedCell: Cell? = temp[row][column]
+        if (clickedCell == null || clickedCell.isEmpty()) {
+            temp[row][column] = Cell(game.currentPlayer)
+            cells.value = temp
+            if(game.hasGameEnded()){
+                Log.v("primjer", "game ended")
+                game.reset()
+            }else{
+                game.switchPlayer()
+            }
 
-        game.switchPlayer()
+        }
+    }
+
+    fun getWinner(): LiveData<Player> {
+        return game.winner
     }
 
 
