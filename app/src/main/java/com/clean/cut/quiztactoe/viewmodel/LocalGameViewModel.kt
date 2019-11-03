@@ -1,8 +1,10 @@
 package com.clean.cut.quiztactoe.viewmodel
 
+import android.content.Intent
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,6 +12,7 @@ import com.clean.cut.quiztactoe.objects.Cell
 
 import com.clean.cut.quiztactoe.objects.Game
 import com.clean.cut.quiztactoe.objects.Player
+import com.clean.cut.quiztactoe.view.LocalGameSetupActivity
 
 class LocalGameViewModel : ViewModel() {
     private var rowCount: Int = 0
@@ -31,6 +34,7 @@ class LocalGameViewModel : ViewModel() {
     }
 
     fun onItemClickListener(parent: ViewGroup, view: View, position: Int, id: Long) {
+
         val row = position / columnCount
         val column = position % columnCount
 
@@ -51,6 +55,9 @@ class LocalGameViewModel : ViewModel() {
 
     fun getWinner(): LiveData<Player> {
         return game.winner
+    }
+    fun winOrDraw(): LiveData<String> {
+        return game.winOrDraw
     }
 
 

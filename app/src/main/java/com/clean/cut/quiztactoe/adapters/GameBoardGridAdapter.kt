@@ -15,8 +15,6 @@ class GameBoardGridAdapter : BaseAdapter() {
     fun setList(list: Array<Array<Cell?>>) {
         this.list = ArrayList(list.flatten().map { it?.player?.sign })
         this.notifyDataSetChanged()
-        Log.v("primjer", "${this.list}")
-
     }
 
     override fun getView(position: Int, view: View?, parent: ViewGroup): View {

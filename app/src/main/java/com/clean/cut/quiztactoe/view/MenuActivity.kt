@@ -1,9 +1,10 @@
-package com.clean.cut.quiztactoe
+package com.clean.cut.quiztactoe.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.clean.cut.quiztactoe.R
 
 class MenuActivity : AppCompatActivity() {
 
@@ -15,4 +16,10 @@ class MenuActivity : AppCompatActivity() {
     fun startActivityLocalGameSetup(view: View) {
         startActivity(Intent(this, LocalGameSetupActivity::class.java))
     }
+
+    fun test(view: View) {
+        startActivity(Intent(this, QuizActivity::class.java))
+    }
+
+
 }

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">QuizTacToe</string>
+    <string name="draw">It\'s a draw</string>
+    <string name="winner">Winner is:</string>
 </resources>

@@ -1,10 +1,7 @@
 package com.clean.cut.quiztactoe.objects
 
-import android.os.Build.VERSION_CODES.*
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import java.lang.IndexOutOfBoundsException
-import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -20,6 +17,7 @@ class Game(
     var player2 = Player(player2Name, "o")
     var currentPlayer = player1
     var winner: MutableLiveData<Player> = MutableLiveData()
+    var winOrDraw: MutableLiveData<String> = MutableLiveData()
 
     fun switchPlayer() {
         currentPlayer = if (currentPlayer == player1) player2 else player1
@@ -28,11 +26,14 @@ class Game(
     fun hasGameEnded(): Boolean {
         if (hasHorizontalWin() || hasVerticalWin() || hasDiagonalWin()) {
             winner.value = currentPlayer
+            winOrDraw.value = "win"
             return true
         }
 
         if (isBoardFull()) {
+            Log.v("primjer", "Board full")
             winner.value = null
+            winOrDraw.value = "draw"
             return true
         }
 
@@ -42,23 +43,23 @@ class Game(
     private fun isBoardFull(): Boolean {
         return !cells.flatten().any { it == null }
     }
-
     private fun hasHorizontalWin(): Boolean {
         for (row in cells) {
             if (areEqual(row.toList() as ArrayList<Cell?>)) {
+                Log.v("primjer", "Horizontal win")
                 return true
             }
         }
         return false
     }
-
     private fun hasVerticalWin(): Boolean {
         val columnList: ArrayList<Cell?> = arrayListOf()
-        for (column in cells[0].indices){
-            for (row in cells.indices){
+        for (column in cells[0].indices) {
+            for (row in cells.indices) {
                 columnList.add(cells[row][column])
             }
-            if(areEqual(columnList)){
+            if (areEqual(columnList)) {
+                Log.v("primjer", "Vertical win")
                 return true
             }
             columnList.clear()
@@ -66,53 +67,64 @@ class Game(
 
         return false
     }
-
     private fun hasDiagonalWin(): Boolean {
-        val diags = arrayListOf<ArrayList<Cell?>>()
-        for (row in rowCount - 1 downTo 2) {
-            diags.add(getDiagonal(row, 0))
+        val diagonals = arrayListOf<ArrayList<Cell?>>()
+        for (row in rowCount - 1 downTo 0) {
+            diagonals.add(getDiagonal(row, 0))
         }
         for (col in 0 until columnCount) {
-            diags.add(getDiagonal(0, col))
+            diagonals.add(getDiagonal(0, col))
+        }
+        for (row in rowCount - 1 downTo 0) {
+            diagonals.add(getDiagonalReverse(row, 0))
+        }
+        for (col in 0 until columnCount) {
+            diagonals.add(getDiagonalReverse2(0, col))
         }
 
-        diags.forEach {if(areEqual(it)) return true}
+        diagonals.forEach {
+            if (areEqual(it)) {
+                Log.v("primjer", "Diagonal win")
+                return true
+            }
+        }
         return false
     }
-
     private fun getDiagonal(_x: Int, _y: Int): ArrayList<Cell?> {
         var x = _x
         var y = _y
-        val diag = arrayListOf<Cell?>()
+        val diagonal = arrayListOf<Cell?>()
         while (x < rowCount && y < columnCount) {
-            diag.add(cells[x++][y++])
+            diagonal.add(cells[x++][y++])
         }
-        return diag
+        return diagonal
     }
-
+    private fun getDiagonalReverse(_x: Int, _y: Int): ArrayList<Cell?> {
+        var x = _x
+        var y = _y
+        val diagonal = arrayListOf<Cell?>()
+        while (y < columnCount && x > 0) {
+            diagonal.add(cells[x--][y++])
+        }
+        return diagonal
+    }
+    private fun getDiagonalReverse2(_x: Int, _y: Int): ArrayList<Cell?> {
+        var x = _x
+        var y = _y
+        val diagonal = arrayListOf<Cell?>()
+        while (x < rowCount && y > 0) {
+            diagonal.add(cells[x++][y--])
+        }
+        return diagonal
+    }
     private fun areEqual(cells: ArrayList<Cell?>): Boolean {
-        if (cells.isNullOrEmpty()) {
-            return false
-        }
-
-        for (cell in cells) {
-            if (cell?.player?.sign.isNullOrEmpty()) {
-                return false
+        for (i in 0 until cells.size - 2) {
+            if (cells[i]?.player?.sign.equals(cells[i + 1]?.player?.sign) &&
+                cells[i + 1]?.player?.sign.equals(cells[i + 2]?.player?.sign) &&
+                cells[i] != null) {
+                return true
             }
         }
-
-        for (i in 0 until cells.size) {
-            try {
-                if (cells[i]?.player?.sign.equals(cells[i + 1]?.player?.sign) &&
-                    cells[i + 1]?.player?.sign.equals(cells[i + 2]?.player?.sign)
-                ) {
-                    return true
-                }
-            } catch (e: IndexOutOfBoundsException) {
-                return false
-            }
-        }
-
         return false
     }
 

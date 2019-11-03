@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MenuActivity"
+    tools:context=".view.MenuActivity"
     android:orientation="vertical">
 
     <TextView
@@ -35,7 +35,8 @@
         android:textSize="18sp"
         android:hint="Working on it..."
         style="@style/ButtonMenu"
-        android:background="@color/primaryLightColorScale2"/>
+        android:background="@color/primaryLightColorScale2"
+        android:onClick="test"/>
     <com.google.android.material.button.MaterialButton
         android:layout_width="match_parent"
         android:layout_height="0dp"
