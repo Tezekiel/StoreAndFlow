@@ -1,18 +1,19 @@
 package com.clean.cut.quiztactoe.view
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.content.ContextCompat
+import android.util.DisplayMetrics
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.clean.cut.quiztactoe.R
 import com.clean.cut.quiztactoe.adapters.GameBoardGridAdapter
 import com.clean.cut.quiztactoe.databinding.ActivityLocalGameBinding
 import com.clean.cut.quiztactoe.objects.Player
 import com.clean.cut.quiztactoe.viewmodel.LocalGameViewModel
 import kotlinx.android.synthetic.main.activity_local_game.*
+import kotlin.math.min
+
 
 class LocalGameActivity : AppCompatActivity() {
     private lateinit var viewModel: LocalGameViewModel
@@ -29,20 +30,31 @@ class LocalGameActivity : AppCompatActivity() {
     }
 
     private fun initialize() {
+        //boilerplate
         val binding: ActivityLocalGameBinding = DataBindingUtil.setContentView(this,
-            R.layout.activity_local_game
+            com.clean.cut.quiztactoe.R.layout.activity_local_game
         )
         viewModel = ViewModelProviders.of(this).get(LocalGameViewModel::class.java)
+
+        //get data from previous activity
         getDataFromIntent()
 
+        //architecture stuff
         viewModel.init(rowCount, columnCount, player1, player2)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        //rv adapter
+        //gv adapter
         adapter = GameBoardGridAdapter()
         adapter.setList(viewModel.cells.value!!)
+
+        //gv looks and adapter
+        val gvParams = boardGv.layoutParams
+        gvParams.width = getDeviceWidth() - 50
+        gvParams.height = gvParams.width
+        boardGv.layoutParams = gvParams
         boardGv.numColumns = columnCount
+
         boardGv.adapter = adapter
 
         //observers
@@ -56,5 +68,16 @@ class LocalGameActivity : AppCompatActivity() {
         player2 = intent.getSerializableExtra("player2") as Player
         rowCount = intent.getIntExtra("rowCount", 3)
         columnCount = intent.getIntExtra("columnCount", 3)
+    }
+
+    private fun getDeviceWidth(): Int {
+        val metrics = DisplayMetrics()
+        windowManager.defaultDisplay.getMetrics(metrics)
+
+        val widthPixels = metrics.widthPixels
+        val heightPixels = metrics.heightPixels
+
+        return min(widthPixels, heightPixels)
+
     }
 }

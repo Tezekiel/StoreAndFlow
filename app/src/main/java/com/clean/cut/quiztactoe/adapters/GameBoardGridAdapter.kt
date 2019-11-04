@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.GridView
 import android.widget.TextView
 import com.clean.cut.quiztactoe.objects.Cell
 
@@ -23,6 +24,10 @@ class GameBoardGridAdapter : BaseAdapter() {
             convertView = LayoutInflater.from(parent.context).inflate(com.clean.cut.quiztactoe.R.layout.item_board_cell, null)
         }
         (convertView as TextView).text = list[position]
+
+        convertView.layoutParams = ViewGroup.LayoutParams(parent.width / (parent as GridView).numColumns, parent.width / parent.numColumns)
+        //convertView.layoutParams.width = parent.width / (parent as GridView).numColumns
+        //convertView.layoutParams.height = convertView.layoutParams.width
         return convertView
 
     }
