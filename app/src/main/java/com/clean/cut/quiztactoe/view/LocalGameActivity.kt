@@ -1,12 +1,15 @@
 package com.clean.cut.quiztactoe.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
+import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.clean.cut.quiztactoe.R
 import com.clean.cut.quiztactoe.adapters.GameBoardGridAdapter
 import com.clean.cut.quiztactoe.databinding.ActivityLocalGameBinding
 import com.clean.cut.quiztactoe.objects.Player
@@ -31,9 +34,7 @@ class LocalGameActivity : AppCompatActivity() {
 
     private fun initialize() {
         //boilerplate
-        val binding: ActivityLocalGameBinding = DataBindingUtil.setContentView(this,
-            com.clean.cut.quiztactoe.R.layout.activity_local_game
-        )
+        val binding: ActivityLocalGameBinding = DataBindingUtil.setContentView(this, R.layout.activity_local_game)
         viewModel = ViewModelProviders.of(this).get(LocalGameViewModel::class.java)
 
         //get data from previous activity
@@ -57,11 +58,25 @@ class LocalGameActivity : AppCompatActivity() {
 
         boardGv.adapter = adapter
 
+        //listener (disable scrolling)
+        boardGv.setOnTouchListener { v, event ->
+            event.action == MotionEvent.ACTION_MOVE
+        }
+
         //observers
         viewModel.cells.observe(this, Observer {
             adapter.setList(it)
         })
+
+        viewModel.startQuizActivity.observe(this, Observer {
+            if(it){
+                val intent = Intent(this, QuizActivity::class.java)
+                intent.putExtra("playerName", viewModel.game.currentPlayer.name)
+                startActivityForResult(intent, 999)
+            }
+        })
     }
+
 
     private fun getDataFromIntent() {
         player1 = intent.getSerializableExtra("player1") as Player

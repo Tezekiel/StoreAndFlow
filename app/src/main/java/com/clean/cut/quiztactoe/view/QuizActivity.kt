@@ -1,35 +1,38 @@
 package com.clean.cut.quiztactoe.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.lifecycle.lifecycleScope
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import com.clean.cut.quiztactoe.R
-import com.clean.cut.quiztactoe.model.repository.QuizActivityRepository
-import com.clean.cut.quiztactoe.objects.Result
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.clean.cut.quiztactoe.databinding.ActivityQuizBinding
+import com.clean.cut.quiztactoe.viewmodel.QuizViewModel
 
 class QuizActivity : AppCompatActivity() {
+    private lateinit var viewModel: QuizViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz)
 
-        val repository: QuizActivityRepository =
-            QuizActivityRepository()
+        initialize()
+    }
 
-        fun getSearchData() {
-            lifecycleScope.launch {
-                val questionsResult = withContext(Dispatchers.IO) {
-                    repository.getQuestions()
-                }
-                Log.v("primjer", questionsResult.results[0].question)
+    private fun initialize() {
+        //boilerplate
+        val binding: ActivityQuizBinding = DataBindingUtil.setContentView(this, R.layout.activity_quiz)
+        viewModel = ViewModelProviders.of(this).get(QuizViewModel::class.java)
 
-            }
-        }
+        //architecture stuff
+        viewModel.init(getDataFromIntent())
+        binding.lifecycleOwner = this
+        binding.viewmodel = viewModel
 
-        getSearchData()
+        //start Quiz
+        viewModel.getSearchData()
+    }
+
+    private fun getDataFromIntent(): String {
+        return intent.getStringExtra("playerName")
     }
 }

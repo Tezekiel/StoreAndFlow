@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.clean.cut.quiztactoe.objects.Cell
 
 import com.clean.cut.quiztactoe.objects.Game
@@ -19,8 +20,9 @@ class LocalGameViewModel : ViewModel() {
     private var columnCount: Int = 0
     private var player1Name: String = ""
     private var player2Name: String = ""
-    private lateinit var game: Game
+    lateinit var game: Game
     val cells = MutableLiveData<Array<Array<Cell?>>>()
+    val startQuizActivity = MutableLiveData<Boolean>()
 
 
     fun init(rowCount: Int, columnCount: Int, player1: Player, player2: Player) {
@@ -29,6 +31,7 @@ class LocalGameViewModel : ViewModel() {
         this.player1Name = player1.name
         this.player2Name = player2.name
 
+        startQuizActivity.value = false
         game = Game(rowCount, columnCount, player1Name, player2Name)
         cells.value = game.cells
     }
@@ -40,15 +43,17 @@ class LocalGameViewModel : ViewModel() {
 
         val temp: Array<Array<Cell?>> = cells.value!!
         val clickedCell: Cell? = temp[row][column]
+
         if (clickedCell == null || clickedCell.isEmpty()) {
-            temp[row][column] = Cell(game.currentPlayer)
+            startQuizActivity.value = true
+            /*temp[row][column] = Cell(game.currentPlayer)
             cells.value = temp
             if(game.hasGameEnded()){
                 Log.v("primjer", "game ended")
                 game.reset()
             }else{
                 game.switchPlayer()
-            }
+            }*/
 
         }
     }

@@ -25,9 +25,8 @@ class GameBoardGridAdapter : BaseAdapter() {
         }
         (convertView as TextView).text = list[position]
 
-        convertView.layoutParams = ViewGroup.LayoutParams(parent.width / (parent as GridView).numColumns, parent.width / parent.numColumns)
-        //convertView.layoutParams.width = parent.width / (parent as GridView).numColumns
-        //convertView.layoutParams.height = convertView.layoutParams.width
+        convertView.layoutParams = ViewGroup.LayoutParams(parent.width / (parent as GridView).numColumns,
+            parent.height / (list.size/parent.numColumns))
         return convertView
 
     }
