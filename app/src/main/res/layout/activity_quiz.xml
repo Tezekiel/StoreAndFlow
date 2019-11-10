@@ -110,38 +110,58 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="3"
-                        android:text="Question placeholder"
-                        android:textSize="18sp" />
+                        android:text="@{viewmodel.question}"
+                        android:textSize="18sp"
+                        android:background="@color/primaryLightColor"
+                        android:textColor="@color/primaryTextColor"/>
 
-                    <TextView
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/first_answer_btn"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:text="Answer1 "
+                        android:text="@{viewmodel.answers[0]}"
+                        android:onClick="@{(view) -> viewmodel.isItCorrect(firstAnswerBtn.text.toString(), view)}"
                         android:textSize="16sp" />
 
-                    <TextView
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/second_answer_btn"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:text="Answer2 "
+                        android:text="@{viewmodel.answers[1]}"
+                        android:onClick="@{(view) -> viewmodel.isItCorrect(secondAnswerBtn.text.toString(), view)}"
                         android:textSize="16sp" />
 
-                    <TextView
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/third_answer_btn"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:text="Answer3"
+                        android:text="@{viewmodel.answers[2]}"
+                        android:onClick="@{(view) -> viewmodel.isItCorrect(thirdAnswerBtn.text.toString(), view)}"
                         android:textSize="16sp" />
 
-                    <TextView
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/fourth_answer_btn"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:text="Answer4"
+                        android:text="@{viewmodel.answers[3]}"
+                        android:onClick="@{(view) -> viewmodel.isItCorrect(fourthAnswerBtn.text.toString(), view)}"
                         android:textSize="16sp" />
 
                 </LinearLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="60dp"
+                    android:onClick="@{() -> viewmodel.backToGame()}"
+                    android:text="@{@string/continue_game(viewmodel.counter)}"
+                    android:visibility="@{viewmodel.questionAnswered ? View.VISIBLE : View.GONE}"/>
             </RelativeLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

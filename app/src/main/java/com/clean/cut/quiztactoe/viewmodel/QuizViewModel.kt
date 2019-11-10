@@ -1,7 +1,8 @@
 package com.clean.cut.quiztactoe.viewmodel
 
+import android.os.CountDownTimer
 import android.util.Log
-import androidx.lifecycle.LiveData
+import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,7 +13,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class QuizViewModel: ViewModel() {
+class QuizViewModel : ViewModel() {
+    private lateinit var correctAnswer: String
+
     private val repository: QuizActivityRepository = QuizActivityRepository()
     val isLoading = MutableLiveData<Boolean>(true)
     val hideFirst = MutableLiveData<Boolean>(false)
@@ -20,6 +23,14 @@ class QuizViewModel: ViewModel() {
     val category1 = MutableLiveData<Question>()
     val category2 = MutableLiveData<Question>()
     val category3 = MutableLiveData<Question>()
+    val question = MutableLiveData<String>()
+    val answers = MutableLiveData<List<String>>()
+    val isItCorrect = MutableLiveData<Boolean>()
+    val clickedAnswer = MutableLiveData<Int>()
+
+    val questionAnswered = MutableLiveData<Boolean>()
+    val counter = MutableLiveData(5)
+    val backToGame = MutableLiveData<Boolean>()
 
 
     fun init(playerName: String) {
@@ -33,20 +44,68 @@ class QuizViewModel: ViewModel() {
                 repository.getQuestions()
             }
 
+            questionsResult.results.forEach { it.category = it.category.replace("&quot;", "'") }
+            questionsResult.results.forEach { it.category = it.category.replace("&#039;", "'") }
+
+            questionsResult.results.forEach { it.question = it.question.replace("&quot;", "'") }
+            questionsResult.results.forEach { it.question = it.question.replace("&#039;", "'") }
+
             isLoading.value = false
             category1.value = questionsResult.results[0]
             category2.value = questionsResult.results[1]
             category3.value = questionsResult.results[2]
+
         }
     }
 
-    fun onCategorySelected(listPosition: Int){
+    fun onCategorySelected(listPosition: Int) {
         hideFirst.value = true
-        when(listPosition){
-            0-> Log.v("primjer", "listpos $listPosition")
-            1-> Log.v("primjer", "listpos $listPosition")
-            2-> Log.v("primjer", "listpos $listPosition")
+        lateinit var chosenCategory: MutableLiveData<Question>
+        when (listPosition) {
+            0 -> chosenCategory = category1
+            1 -> chosenCategory = category2
+            2 -> chosenCategory = category3
         }
+        populateQuiz(chosenCategory)
+    }
+
+    private fun populateQuiz(chosenCategory: MutableLiveData<Question>) {
+        question.value = chosenCategory.value?.question
+        correctAnswer = chosenCategory.value?.correctAnswer.toString()
+        var allAnswers = mutableListOf<String>()
+        allAnswers.addAll(chosenCategory.value?.incorrectAnswers!!)
+        allAnswers.add(chosenCategory.value?.correctAnswer!!)
+        allAnswers.shuffle()
+        allAnswers = allAnswers.map { it.replace("&quot;", "'") } as MutableList<String>
+        allAnswers = allAnswers.map { it.replace("&#039;", "'") } as MutableList<String>
+        answers.value = allAnswers
+    }
+
+    fun isItCorrect(answer: String, view: View) {
+        clickedAnswer.value = view.id
+        isItCorrect.value = answer == correctAnswer
+
+        questionAnswered.value = true
+        showContinueGameBtn()
+    }
+
+    private fun showContinueGameBtn() {
+        val timer = object : CountDownTimer(5000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                counter.value = counter.value?.minus(1)
+            }
+
+            override fun onFinish() {
+                backToGame()
+            }
+        }
+        timer.start()
+
+
+    }
+
+    fun backToGame() {
+        backToGame.value = true
     }
 
 

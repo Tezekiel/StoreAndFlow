@@ -3,4 +3,6 @@
     <string name="draw">It\'s a draw</string>
     <string name="winner">Winner is:</string>
     <string name="category_name">%1$s (%2$s)</string>
+    <string name="continue_game">Continue game(%1$s)</string>
+    <string name="now_playing">Now playing: %1$s</string>
 </resources>

@@ -1,10 +1,12 @@
 package com.clean.cut.quiztactoe.view
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.MotionEvent
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -59,7 +61,7 @@ class LocalGameActivity : AppCompatActivity() {
         boardGv.adapter = adapter
 
         //listener (disable scrolling)
-        boardGv.setOnTouchListener { v, event ->
+        boardGv.setOnTouchListener { _, event ->
             event.action == MotionEvent.ACTION_MOVE
         }
 
@@ -77,7 +79,6 @@ class LocalGameActivity : AppCompatActivity() {
         })
     }
 
-
     private fun getDataFromIntent() {
         player1 = intent.getSerializableExtra("player1") as Player
         player2 = intent.getSerializableExtra("player2") as Player
@@ -93,6 +94,16 @@ class LocalGameActivity : AppCompatActivity() {
         val heightPixels = metrics.heightPixels
 
         return min(widthPixels, heightPixels)
+    }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+       if(requestCode == 999){
+           if(resultCode == Activity.RESULT_OK){
+               if (data != null) {
+                   viewModel.questionAnswered(data.getBooleanExtra("result", false))
+
+               }
+           }
+       }
     }
 }
