@@ -76,10 +76,10 @@ class Game(
             diagonals.add(getDiagonal(0, col))
         }
         for (row in rowCount - 1 downTo 0) {
-            diagonals.add(getDiagonalReverse(row, 0))
+            diagonals.add(getDiagonalReverse(row))
         }
         for (col in 0 until columnCount) {
-            diagonals.add(getDiagonalReverse2(0, col))
+            diagonals.add(getDiagonalReverse2(col))
         }
 
         diagonals.forEach {
@@ -99,21 +99,25 @@ class Game(
         }
         return diagonal
     }
-    private fun getDiagonalReverse(_x: Int, _y: Int): ArrayList<Cell?> {
+    private fun getDiagonalReverse(_x: Int): ArrayList<Cell?> {
         var x = _x
-        var y = _y
+        var y = 0
         val diagonal = arrayListOf<Cell?>()
-        while (y < columnCount && x > 0) {
-            diagonal.add(cells[x--][y++])
+        while (y < columnCount && x >= 0) {
+            diagonal.add(cells[x][y])
+            x--
+            y++
         }
         return diagonal
     }
-    private fun getDiagonalReverse2(_x: Int, _y: Int): ArrayList<Cell?> {
-        var x = _x
+    private fun getDiagonalReverse2(_y: Int): ArrayList<Cell?> {
+        var x = 0
         var y = _y
         val diagonal = arrayListOf<Cell?>()
-        while (x < rowCount && y > 0) {
-            diagonal.add(cells[x++][y--])
+        while (x < rowCount && y >= 0) {
+            diagonal.add(cells[x][y])
+            x++
+            y--
         }
         return diagonal
     }
@@ -128,7 +132,4 @@ class Game(
         return false
     }
 
-    fun reset() {
-        //TODO
-    }
 }

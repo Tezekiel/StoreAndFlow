@@ -8,7 +8,7 @@
         <import type="android.view.View" />
 
         <variable
-            name="viewModel"
+            name="viewmodel"
             type="com.clean.cut.quiztactoe.viewmodel.LocalGameViewModel" />
     </data>
 
@@ -21,7 +21,8 @@
             android:id="@+id/winOrDrawTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text='@{viewModel.winOrDraw.equals("draw") ? @string/draw : viewModel.winOrDraw.equals("win") ? @string/winner : ""}'
+            android:text='@{viewmodel.winOrDraw.equals("draw") ? @string/draw : viewmodel.winOrDraw.equals("win") ? @string/winner : ""}'
+            android:visibility="@{viewmodel.gameOver ? View.VISIBLE : View.GONE}"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,8 +32,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="@{viewModel.gameOver ? View.GONE : View.VISIBLE }"
-            android:text="@{@string/now_playing(viewModel.currentlyPlaying)}"
+            android:visibility="@{viewmodel.gameOver ? View.GONE : View.VISIBLE }"
+            android:text="@{@string/now_playing(viewmodel.currentlyPlaying)}"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +44,8 @@
             android:id="@+id/winnerTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.winner.name}"
+            android:text="@{viewmodel.winner.name}"
+            android:visibility="@{viewmodel.gameOver ? View.VISIBLE : View.GONE}"
             android:textSize="24sp"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -66,9 +68,18 @@
                 android:horizontalSpacing="4dp"
                 android:verticalSpacing="2dp"
                 android:scrollbars="none"
-                app:OnItemClickListener="@{(parent, view, position,id)->viewModel.onItemClickListener(parent, view, position,id)}" />
+                app:OnItemClickListener="@{(parent, view, position,id)->viewmodel.onItemClickListener(parent, view, position,id)}" />
 
         </RelativeLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{(view) -> viewmodel.resetGame()}"
+            android:text="Play again?"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="@{viewmodel.gameOver ? View.VISIBLE : View.GONE}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

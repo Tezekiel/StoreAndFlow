@@ -17,8 +17,8 @@ class MenuActivity : AppCompatActivity() {
         startActivity(Intent(this, LocalGameSetupActivity::class.java))
     }
 
-    fun test(view: View) {
-        startActivity(Intent(this, QuizActivity::class.java))
+    fun closeApp(view: View) {
+        finish()
     }
 
 

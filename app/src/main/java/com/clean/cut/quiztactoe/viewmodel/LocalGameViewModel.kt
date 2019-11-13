@@ -36,13 +36,15 @@ class LocalGameViewModel : ViewModel() {
     }
 
     fun onItemClickListener(parent: ViewGroup, view: View, position: Int, id: Long) {
-        row = position / columnCount
-        column = position % columnCount
+        if(!gameOver.value!!){
+            row = position / columnCount
+            column = position % columnCount
 
-        val clickedCell: Cell? = cells.value?.get(row)?.get(column)
+            val clickedCell: Cell? = cells.value?.get(row)?.get(column)
 
-        if (clickedCell == null || clickedCell.isEmpty()) {
-            startQuizActivity.value = true
+            if (clickedCell == null || clickedCell.isEmpty()) {
+                startQuizActivity.value = true
+            }
         }
     }
 
@@ -61,12 +63,19 @@ class LocalGameViewModel : ViewModel() {
 
         if (questionAnsweredCorrectly && game.hasGameEnded()) {
             gameOver.value = true
-            game.reset()
         } else {
             game.switchPlayer()
             currentlyPlaying.value = game.currentPlayer.name
         }
     }
 
+    fun resetGame(){
+        game = Game(rowCount, columnCount, player1Name, player2Name)
+        cells.value = game.cells
+        game.switchPlayer()
+        currentlyPlaying.value = game.currentPlayer.name
+
+        gameOver.value = false
+    }
 
 }

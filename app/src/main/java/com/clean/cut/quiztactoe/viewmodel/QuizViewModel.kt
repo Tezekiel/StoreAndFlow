@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.clean.cut.quiztactoe.model.repository.QuizActivityRepository
 import com.clean.cut.quiztactoe.objects.Question
+import com.clean.cut.quiztactoe.objects.Result
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -44,17 +45,12 @@ class QuizViewModel : ViewModel() {
                 repository.getQuestions()
             }
 
-            questionsResult.results.forEach { it.category = it.category.replace("&quot;", "'") }
-            questionsResult.results.forEach { it.category = it.category.replace("&#039;", "'") }
-
-            questionsResult.results.forEach { it.question = it.question.replace("&quot;", "'") }
-            questionsResult.results.forEach { it.question = it.question.replace("&#039;", "'") }
+            replaceStrings(questionsResult)
 
             isLoading.value = false
             category1.value = questionsResult.results[0]
             category2.value = questionsResult.results[1]
             category3.value = questionsResult.results[2]
-
         }
     }
 
@@ -72,12 +68,10 @@ class QuizViewModel : ViewModel() {
     private fun populateQuiz(chosenCategory: MutableLiveData<Question>) {
         question.value = chosenCategory.value?.question
         correctAnswer = chosenCategory.value?.correctAnswer.toString()
-        var allAnswers = mutableListOf<String>()
+        val allAnswers = mutableListOf<String>()
         allAnswers.addAll(chosenCategory.value?.incorrectAnswers!!)
         allAnswers.add(chosenCategory.value?.correctAnswer!!)
         allAnswers.shuffle()
-        allAnswers = allAnswers.map { it.replace("&quot;", "'") } as MutableList<String>
-        allAnswers = allAnswers.map { it.replace("&#039;", "'") } as MutableList<String>
         answers.value = allAnswers
     }
 
@@ -106,6 +100,31 @@ class QuizViewModel : ViewModel() {
 
     fun backToGame() {
         backToGame.value = true
+    }
+
+    private fun replaceStrings(questionsResult: Result) {
+        //categories
+        questionsResult.results.forEach { it.category = it.category.replace("&quot;", "\"") }
+        questionsResult.results.forEach { it.category = it.category.replace("&#039;", "'") }
+
+        //questions
+        questionsResult.results.forEach { it.question = it.question.replace("&quot;", "\"") }
+        questionsResult.results.forEach { it.question = it.question.replace("&#039;", "'") }
+
+        //correctAnswers
+        questionsResult.results.forEach {
+            it.correctAnswer = it.correctAnswer.replace("&quot;", "\"")
+        }
+        questionsResult.results.forEach {
+            it.correctAnswer = it.correctAnswer.replace("&#039;", "'")
+        }
+        //wrongAnswers
+        questionsResult.results.forEach { it1 ->
+            it1.incorrectAnswers = it1.incorrectAnswers.map { it.replace("&quot;", "\"") }
+        }
+        questionsResult.results.forEach { it1 ->
+            it1.incorrectAnswers = it1.incorrectAnswers.map { it.replace("&#039;;", "\"") }
+        }
     }
 
 

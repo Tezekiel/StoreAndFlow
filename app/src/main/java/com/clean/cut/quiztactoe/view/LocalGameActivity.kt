@@ -45,7 +45,7 @@ class LocalGameActivity : AppCompatActivity() {
         //architecture stuff
         viewModel.init(rowCount, columnCount, player1, player2)
         binding.lifecycleOwner = this
-        binding.viewModel = viewModel
+        binding.viewmodel = viewModel
 
         //gv adapter
         adapter = GameBoardGridAdapter()
