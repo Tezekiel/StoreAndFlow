@@ -9,6 +9,8 @@
   <color name="primaryLightColorScale2">#636FFF</color>
   <color name="primaryLightColorScale3">#4B62FF</color>
   <color name="primaryLightColorScale4">#374BFF</color>
-    <color name="green">#115811</color>
+  <color name="green">#115811</color>
   <color name="red">#7E1A1A</color>
+  <color name="opaque_white">#4DFFFFFF</color>
+  <color name="white">#FFFFFF</color>
 </resources>
