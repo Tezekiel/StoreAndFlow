@@ -14,4 +14,5 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="login_info">You can login with your default name or you can pick any name you want just for this app.Your name will be used in scoreboard ladders and other in-app locations</string>
 </resources>

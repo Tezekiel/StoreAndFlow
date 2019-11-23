@@ -3,6 +3,7 @@ package com.clean.cut.quiztactoe.view
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -12,6 +13,7 @@ import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_login_activity.*
 
 
 class LoginActivity : AppCompatActivity() {
@@ -63,7 +65,11 @@ class LoginActivity : AppCompatActivity() {
         try {
             val account = completedTask.getResult(ApiException::class.java)
             Snackbar.make(this.window.decorView.rootView, "Logged in", Snackbar.LENGTH_SHORT).show()
-            Snackbar.make(this.window.decorView.rootView, "${account?.displayName}", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(
+                this.window.decorView.rootView,
+                "${account?.displayName}",
+                Snackbar.LENGTH_SHORT
+            ).show()
 
             val intent = Intent(this, MenuActivity::class.java)
             startActivity(intent)

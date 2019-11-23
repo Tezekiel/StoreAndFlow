@@ -1,7 +1,7 @@
 <!--?xml version="1.0" encoding="UTF-8"?-->
 <resources>
   <color name="primaryColor">#2962ff</color>
-  <color name="primaryLightColor">#768fff</color>
+  <color name="primaryLightColor">#4DFFFFFF</color>
   <color name="primaryDarkColor">#0039cb</color>
   <color name="primaryTextColor">#ffffff</color>
 
@@ -12,5 +12,6 @@
   <color name="green">#115811</color>
   <color name="red">#7E1A1A</color>
   <color name="opaque_white">#4DFFFFFF</color>
+  <color name="alpha">#00FFFFFF</color>
   <color name="white">#FFFFFF</color>
 </resources>
