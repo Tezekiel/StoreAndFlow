@@ -1,15 +1,17 @@
 <!--?xml version="1.0" encoding="UTF-8"?-->
 <resources>
-  <color name="primaryColor">#2962ff</color>
-  <color name="primaryLightColor">#4DFFFFFF</color>
-  <color name="primaryDarkColor">#0039cb</color>
+  <color name="primaryColor">#1A6651</color>
+  <color name="primaryLightColor">#478574</color>
+  <color name="primaryDarkColor">#144542</color>
   <color name="primaryTextColor">#ffffff</color>
 
   <color name="primaryLightColorScale0">#AEB7FF</color>
   <color name="primaryLightColorScale2">#636FFF</color>
   <color name="primaryLightColorScale3">#4B62FF</color>
   <color name="primaryLightColorScale4">#374BFF</color>
-  <color name="green">#115811</color>
+  <color name="green_blue">#144542</color>
+  <color name="light_green">#1A6651</color>
+  <color name="lightest_green">#478574</color>
   <color name="red">#7E1A1A</color>
   <color name="opaque_white">#4DFFFFFF</color>
   <color name="alpha">#00FFFFFF</color>

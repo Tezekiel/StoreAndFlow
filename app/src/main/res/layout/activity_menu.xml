@@ -6,49 +6,24 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_pacific_dream"
     android:orientation="vertical"
-    tools:context=".view.MenuActivity">
-
-    <androidx.cardview.widget.CardView
-        style="@style/Widget.MaterialComponents.CardView"
-        app:cardElevation="0dp"
-        android:id="@+id/profile_cv"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_centerHorizontal="true"
-        android:elevation="10dp"
-        app:cardCornerRadius="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="75dp"
-        android:backgroundTint="@color/opaque_white">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:tint="@color/white"
-            android:id="@+id/profile_img_iv"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:scaleType="centerCrop"
-            android:padding="12dp"
-            android:src="@drawable/ic_user_male" />
-    </androidx.cardview.widget.CardView>
+    tools:context=".menu.MenuActivity">
 
     <TextView
         android:id="@+id/welcome_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome"
+        android:text="@string/welcome"
         android:textColor="@color/white"
-        android:layout_margin="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_cv" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="150dp"/>
 
     <TextView
         android:id="@+id/name_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nikola Tesla"
+        tools:text="Nikola Tesla"
         android:textColor="@color/white"
         android:layout_margin="8dp"
         android:textSize="22sp"
@@ -59,8 +34,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/local_game_btn"
         style="@style/ButtonMenu"
-        android:onClick="startActivityLocalGameSetup"
-        android:text="Local game"
+        android:text="@string/local_game"
         app:icon="@drawable/ic_local_game"
         app:iconSize="22dp"
         app:iconGravity="textStart"
@@ -72,34 +46,21 @@
     </com.google.android.material.button.MaterialButton>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/online_game_btn"
-        style="@style/ButtonMenu"
-        android:text="Online game"
-        app:icon="@drawable/ic_online"
-        app:iconSize="18dp"
-        app:iconGravity="textStart"
-        app:iconPadding="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/local_game_btn" />
-
-    <com.google.android.material.button.MaterialButton
         android:id="@+id/about_btn"
         style="@style/ButtonMenu"
-        android:text="About"
+        android:text="@string/about"
         app:icon="@drawable/ic_about"
         app:iconSize="20dp"
         app:iconGravity="textStart"
         app:iconPadding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/online_game_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/local_game_btn" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/exit_btn"
         style="@style/ButtonMenu"
-        android:onClick="closeApp"
-        android:text="Exit"
+        android:text="@string/exit"
         app:icon="@drawable/ic_exit"
         app:iconSize="20dp"
         app:iconGravity="textStart"
