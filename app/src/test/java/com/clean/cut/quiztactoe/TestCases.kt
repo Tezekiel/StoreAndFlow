@@ -19,19 +19,27 @@ val boardStateHorizontalWin = mutableListOf(
 )
 
 val boardStateDiagonalDownWin = mutableListOf(
-  Cell(player1), Cell(null), Cell(player1), Cell(null), Cell(null),
+  Cell(player1), Cell(null), Cell(null), Cell(null), Cell(null),
   Cell(null), Cell(player1), Cell(null), Cell(player1), Cell(null),
-  Cell(null), Cell(player2), Cell(null), Cell(null), Cell(player1),
-  Cell(null), Cell(player1), Cell(null), Cell(null), Cell(null),
-  Cell(null), Cell(null), Cell(player1), Cell(null), Cell(null)
+  Cell(null), Cell(player2), Cell(player2), Cell(null), Cell(player1),
+  Cell(null), Cell(null), Cell(null), Cell(player2), Cell(null),
+  Cell(null), Cell(null), Cell(player1), Cell(player2), Cell(player2)
 )
 
 val boardStateDiagonalUpWin = mutableListOf(
   Cell(player1), Cell(null), Cell(null), Cell(null), Cell(null),
-  Cell(null), Cell(null), Cell(null), Cell(player1), Cell(null),
-  Cell(null), Cell(null), Cell(player1), Cell(null), Cell(null),
-  Cell(null), Cell(player1), Cell(null), Cell(null), Cell(null),
-  Cell(null), Cell(null), Cell(null), Cell(null), Cell(null)
+  Cell(null), Cell(null), Cell(null), Cell(null), Cell(null),
+  Cell(null), Cell(null), Cell(null), Cell(null), Cell(player1),
+  Cell(null), Cell(player1), Cell(null), Cell(player1), Cell(null),
+  Cell(null), Cell(null), Cell(player1), Cell(null), Cell(null)
+)
+
+val boardStateDiagonalUpWin2 = mutableListOf(
+  Cell(null), Cell(null), Cell(null),
+  Cell(null), Cell(null), Cell(player2),
+  Cell(null), Cell(player2), Cell(null),
+  Cell(player2), Cell(null), Cell(null),
+  Cell(null), Cell(null), Cell(null)
 )
 
 val noWin = mutableListOf(

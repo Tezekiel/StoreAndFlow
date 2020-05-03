@@ -20,14 +20,20 @@ class GameBoardTest {
   }
 
   @Test
-  fun `diagonal down line win`(){
+  fun `diagonal down win`(){
     val game = Game(cells = boardStateDiagonalDownWin, currentPlayer = player1, otherPlayer = player2, rows = 5, columns = 5)
     assertTrue(game.checkAllLines())
   }
 
   @Test
-  fun `diagonal up line win`(){
+  fun `diagonal up win`(){
     val game = Game(cells = boardStateDiagonalUpWin, currentPlayer = player1, otherPlayer = player2, rows = 5, columns = 5)
+    assertTrue(game.checkAllLines())
+  }
+
+  @Test
+  fun `diagonal up win 2`(){
+    val game = Game(cells = boardStateDiagonalUpWin2, currentPlayer = player1, otherPlayer = player2, rows = 5, columns = 3)
     assertTrue(game.checkAllLines())
   }
 

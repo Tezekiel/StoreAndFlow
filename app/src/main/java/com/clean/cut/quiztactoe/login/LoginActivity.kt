@@ -20,7 +20,10 @@ class LoginActivity : AppCompatActivity() {
     btn_log_in.setOnClickListener { viewModel.logInCLicked(user_name_et.toText()) }
 
     viewModel.savedName.observe(this, Observer {user_name_et.setText(it)})
-    viewModel.login.observe(this, Observer { startActivity(Intent(this, MenuActivity::class.java)) })
+    viewModel.login.observe(this, Observer {
+      startActivity(Intent(this, MenuActivity::class.java))
+      finish()
+    })
     viewModel.error.observe(this, Observer { user_name_til.error = getString(R.string.error_empty) })
   }
 }

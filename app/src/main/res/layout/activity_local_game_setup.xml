@@ -67,6 +67,8 @@
                 style="@style/FormField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="3"
+                android:maxLength="1"
                 android:hint="@string/enter_number_of_rows"
                 android:digits="3456"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -82,6 +84,8 @@
                 android:id="@+id/columnNumberEt"
                 style="@style/FormField"
                 android:layout_width="match_parent"
+                android:text="3"
+                android:maxLength="1"
                 android:layout_height="wrap_content"
                 android:hint="@string/enter_number_of_columns"
                 android:digits="3456"/>

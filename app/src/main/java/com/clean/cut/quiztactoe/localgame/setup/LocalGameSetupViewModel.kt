@@ -9,7 +9,7 @@ import com.clean.cut.quiztactoe.model.Player
 import com.clean.cut.quiztactoe.util.SingleLiveEvent
 import com.clean.cut.quiztactoe.util.mutate
 
-class LocalGameSetupViewModel(val store: UserStore) : ViewModel() {
+class LocalGameSetupViewModel(store: UserStore) : ViewModel() {
 
   val state = MutableLiveData(LocalGameSetupViewState())
   val userNameAvailable = SingleLiveEvent<String>()
