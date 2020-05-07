@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="@color/light_green"
+    android:layout_marginBottom="6dp"
+    app:cardCornerRadius="8dp"
+    android:elevation="8dp">
+
+    <TextView
+        android:id="@+id/tv_question"
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        tools:text="What is the name of some person from 1456. who did something" />
+
+</androidx.cardview.widget.CardView>

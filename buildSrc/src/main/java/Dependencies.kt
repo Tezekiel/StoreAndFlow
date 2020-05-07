@@ -1,4 +1,4 @@
-package com.clean.cut.quiztactoe
+package com.undabot.storeandflow
 
 object Versions {
     const val compileSdk = 28

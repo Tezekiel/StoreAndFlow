@@ -1,12 +1,9 @@
-import com.clean.cut.quiztactoe.Libs
-import com.clean.cut.quiztactoe.Versions
+import com.undabot.storeandflow.Libs
+import com.undabot.storeandflow.Versions
 
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
-
 apply plugin: 'kotlin-kapt'
 
 android {
@@ -39,6 +36,10 @@ android {
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
+
+        // Enable experimental coroutines APIs, including Flow
+        freeCompilerArgs += "-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi"
+        freeCompilerArgs += "-Xuse-experimental=kotlinx.coroutines.FlowPreview"
     }
 }
 
@@ -82,6 +83,9 @@ dependencies {
     implementation Libs.AndroidX.Lifecycle.extensions
     implementation Libs.AndroidX.Lifecycle.viewModel
     kapt Libs.AndroidX.Lifecycle.compiler
+
+    // Store
+    implementation Libs.store
 
     //tests
     implementation Libs.Test.junit
