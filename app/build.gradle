@@ -82,12 +82,13 @@ dependencies {
     // Architecture components
     implementation Libs.AndroidX.Lifecycle.extensions
     implementation Libs.AndroidX.Lifecycle.viewModel
+    implementation Libs.AndroidX.Lifecycle.runtime
     kapt Libs.AndroidX.Lifecycle.compiler
 
     // Store
     implementation Libs.store
 
-    //tests
+    // Tests
     implementation Libs.Test.junit
     implementation Libs.Test.assertj
 }

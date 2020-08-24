@@ -1,11 +1,11 @@
 package com.undabot.storeandflow.di
 
-import com.undabot.storeandflow.data.repository.QuestionsDataSource
-import com.undabot.storeandflow.data.repository.QuestionsRepositoryImpl
-import com.undabot.storeandflow.domain.repository.QuestionsRepository
+import com.undabot.storeandflow.data.repository.MessagesDataSource
+import com.undabot.storeandflow.data.repository.MessagesRepositoryImpl
+import com.undabot.storeandflow.domain.repository.MessagesRepository
 import org.koin.dsl.module
 
 val repositoryModule = module {
-  single<QuestionsRepository> { QuestionsRepositoryImpl(get()) }
-  single { QuestionsDataSource(get()) }
+  single<MessagesRepository> { MessagesRepositoryImpl(get()) }
+  single { MessagesDataSource() }
 }

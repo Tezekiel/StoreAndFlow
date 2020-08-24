@@ -8,7 +8,7 @@ object Versions {
 }
 
 object Libs {
-    const val androidGradlePlugin = "com.android.tools.build:gradle:4.0.0-beta05"
+    const val androidGradlePlugin = "com.android.tools.build:gradle:4.0.0"
     const val androidDesugar = "com.android.tools:desugar_jdk_libs:1.0.5"
     const val googleServicesGradlePlugin = "com.google.gms:google-services:4.3.3"
     const val ktlintGradlePlugin = "org.jlleitschuh.gradle:ktlint-gradle:9.2.1"
@@ -22,7 +22,7 @@ object Libs {
     }
 
     object Coroutines {
-        private const val version = "1.3.3"
+        private const val version = "1.3.6"
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
         const val rx2 = "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:$version"
         const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
@@ -101,6 +101,7 @@ object Libs {
             const val compiler = "androidx.lifecycle:lifecycle-compiler:$version"
             const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
             const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:$version"
+            const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:$version"
         }
 
         object Navigation {

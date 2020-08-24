@@ -1,7 +1,6 @@
 package com.undabot.storeandflow.app
 
 import android.app.Application
-import com.undabot.storeandflow.di.apiModule
 import com.undabot.storeandflow.di.interactorModule
 import com.undabot.storeandflow.di.repositoryModule
 import com.undabot.storeandflow.di.viewModelModule
@@ -21,7 +20,7 @@ class App : Application() {
     startKoin {
       androidLogger(org.koin.core.logger.Level.DEBUG)
       androidContext(this@App)
-      modules(listOf(repositoryModule, apiModule, viewModelModule, interactorModule))
+      modules(listOf(repositoryModule, viewModelModule, interactorModule))
     }
   }
 }
